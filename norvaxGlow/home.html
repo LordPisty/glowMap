@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="media/reset.css">
+<link rel="stylesheet" href="media/styleglow.css">
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<title>Norvax Glow</title>
+</head>
+<body >
+<div id="screen" style="width:1280px; height:1024px;">
+	<div id="header">
+		<div id="logo" >
+			<img src="media/norvaxlogo.gif">
+		</div>
+		<div id="title">
+			Real Time Quotes
+		</div>
+	</div>
+	<div class="clearfloat" ></div>
+	<div id="mapContainer" >
+		<div id="mapDiv" >
+			<img style="position: absolute; margin-top: 5px; margin-left: 33px; overflow: hidden; z-index: 5; width: 1216px;" src="media/worldn-new-3200px.png">
+			<canvas id="pings" width="3000" height="3200" style="position: absolute; margin-top: -859px; margin-left: -1135px; overflow: hidden; z-index: 6;">
+			</canvas>
+		</div>
+	</div>
+	<div class="clearfloat" ></div>
+	<div id="footer">
+		<div id="fleft" >
+			<div id="dailycounter"> 
+			</div>
+			<p class="quotesLabel">Quotes Today</p>
+		</div>
+		<div id="fcenter">
+			<div id="weeklycounter"> 
+			</div>
+			<p class="quotesLabel">Quotes This Week</p>
+		</div>
+		<div id="fright">
+			<div id="monthlycounter"> 
+			</div>
+			<p class="quotesLabel">Quotes This Month</p>
+		</div>
+	</div>
+	
+</div>
+
+<script src="dynamo/"></script>
+<script src="media/vast.js"></script>
+<script src="media/gettext.js"></script>
+<script src="media/counter.js"></script>
+
+<script type="text/javascript">
+var $mc;
+var $map;
+var http;
+var starting_path;
+var chart;
+var TLdata;
+
+$(document).ready(function() {
+	
+	initFFX();
+	doFirstRequest();
+});
+
+function doFirstRequest() {
+
+	http = new XMLHttpRequest();
+	http.open("GET", "redirect.php", true);
+	http.onreadystatechange = useHttpResponse;
+	http.send(null);
+
+}
+
+function  useHttpResponse() {
+  	if (http.readyState == 4) {
+  	  	var textout = http.responseText;
+  	  	starting_path = textout;
+		glow.init();
+	
+    		glow.view = "map";	  
+  	}
+}
+
+function initFFX() {
+
+	$mc = $("#mapContainer");
+	$map = $("#mapDiv");
+
+}
+    
+</script>	
+
+<script src="media/glow.js"></script>
+<script src="media/map.js"></script>
+	
+</body>
+</html>
+
